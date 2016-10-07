@@ -8,28 +8,58 @@
 
 import UIKit
 
-class SIStartViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+class SIStartViewController: UIViewController, UITextFieldDelegate {
+    
+    // MARK: - Properties
+    
+    private static let kSearchSegueId = "SearchSegue"
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // MARK: - Outlets
+    
+    @IBOutlet weak var searchTextField: UITextField!
+    
+    // MARK: - TextField Delegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == self.searchTextField {
+            self.performSegue(withIdentifier: SIStartViewController.kSearchSegueId, sender: textField)
+        }
+        return true
     }
     
-
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        guard let text = self.searchTextField.text else {
+            self.showErrorAlert(error: "Nothing to search")
+            return false
+        }
+        guard text.isEmpty else {
+            self.showErrorAlert(error: "Nothing to search")
+            return false
+            self.prepare(for: <#T##UIStoryboardSegue#>, sender: <#T##Any?#>)
+        }
+        return true
     }
-    */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let segueId = segue.identifier else {
+            return
+        }
+        if segueId == SIStartViewController.kSearchSegueId {
+            if let destinationViewController = segue.destination as? SISearchResultsViewController {
+                destinationViewController.searchString = self.searchTextField.text
+            }
+            return
+        }
+    }
+    
+    // MARK: - Helper
 
+    private func showErrorAlert(error: String) {
+        let alert = UIAlertController(title: "Error", message: "Nothing to search", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

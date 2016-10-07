@@ -8,28 +8,46 @@
 
 import UIKit
 
-class SISearchResultsViewController: UIViewController {
+class SISearchResultsViewController: UIViewController, UITextFieldDelegate {
+    // MARK: - Properties
+    var searchString: String?
 
+    // MARK: - Outlets
+    @IBOutlet weak var imagesCollectionView: UICollectionView!
+    @IBOutlet weak var searchTextField: UITextField!
+    
+    // MARK: - View Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // MARK: - Actions
+    @IBAction func searchButtonPressed(_ sender: AnyObject) {
+        self.updateImages()
+    }
+    @IBAction func sizeSegmentControlValueChanged(_ sender: AnyObject) {
+        self.imagesCollectionView.reloadData()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - TextField Delegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.updateImages()
+        return true
     }
-    */
-
+    
+    // MARK: - Navigation
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return true
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    }
+    
+    // MARK: - Model Interaction
+    
+    private func updateImages() {
+        
+    }
 }

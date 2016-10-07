@@ -46,11 +46,14 @@
                                         <color key="textColor" red="0.23921568630000001" green="0.71372549019999998" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="RRp-YI-Yre"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSY-fB-Nyq">
                                         <state key="normal" title="Search &gt;"/>
                                         <connections>
-                                            <segue destination="6qh-zO-CEW" kind="show" id="Z6G-tw-Mcx"/>
+                                            <segue destination="6qh-zO-CEW" kind="show" identifier="SearchSegue" id="Z6G-tw-Mcx"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -76,6 +79,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Yh8-nW-Sx6"/>
+                    <connections>
+                        <outlet property="searchTextField" destination="0Kl-h6-xXY" id="ZjE-fY-AcA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -99,9 +105,15 @@
                                         <color key="textColor" red="0.23921568630000001" green="0.71372549019999998" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="6qh-zO-CEW" id="Fpq-nf-6KZ"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yq9-51-md0">
                                         <state key="normal" title="Search &gt;"/>
+                                        <connections>
+                                            <action selector="searchButtonPressed:" destination="6qh-zO-CEW" eventType="touchUpInside" id="A1y-di-ed2"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -142,6 +154,10 @@
                                         </constraints>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="6qh-zO-CEW" id="9De-5a-5VX"/>
+                                    <outlet property="delegate" destination="6qh-zO-CEW" id="89q-1F-wGp"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -165,8 +181,15 @@
                                 <segment title="Medium"/>
                                 <segment title="Small"/>
                             </segments>
+                            <connections>
+                                <action selector="sizeSegmentControlValueChanged:" destination="6qh-zO-CEW" eventType="valueChanged" id="10p-f1-9Mz"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
+                    <connections>
+                        <outlet property="imagesCollectionView" destination="yZw-yp-POy" id="65g-Vg-rC2"/>
+                        <outlet property="searchTextField" destination="UhF-zp-VAN" id="hfV-Qc-Kqp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Br6-m0-rYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
